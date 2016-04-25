@@ -1,4 +1,4 @@
-package com.wangzhengzhen.commons.validator.test;
+package com.wangzhengzhen.commons.validator.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -7,16 +7,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 自定义验证性别的注解
- * @author wangzhengzhen
- *
- */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface Sex {
+public @interface IntegerNumber {
 
 	/**
 	 * 用来排列验证的先后序，也可以用来标记在一个类中唯一属性
@@ -30,16 +25,31 @@ public @interface Sex {
      */
 	int[] groupId() default -1;
 
-	int failureDescResId() default -1;
-
-	String failureCode() default "";
-	
-	String failureDesc() default "";
-	
 	/**
-	 * 性别取值，只能是 男 或 女
+	 * 固定值
+	 * 
 	 * @return
 	 */
-	String[] value() default {"男", "女"};
+	int value() default -1;
+
+	/**
+	 * 最大值
+	 * 
+	 * @return
+	 */
+	int max() default -1;
+
+	/**
+	 * 最小值
+	 * 
+	 * @return
+	 */
+	int min() default -1;
+
+	int failureDescResId() default -1;
 	
+	String failureCode() default "";
+
+	String failureDesc() default "";
+
 }

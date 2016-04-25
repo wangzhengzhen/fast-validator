@@ -33,14 +33,14 @@ public @interface Length {
 	int fix() default -1;
 
 	/**
-	 * 最大值
+	 * 最大长度
 	 * 
 	 * @return
 	 */
 	int max() default -1;
 
 	/**
-	 * 最小值
+	 * 最小长度
 	 * 
 	 * @return
 	 */
