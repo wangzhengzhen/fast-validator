@@ -1,5 +1,7 @@
 package com.wangzhengzhen.commons.validator.test;
 
+import java.util.List;
+
 import com.wangzhengzhen.commons.validator.Validator;
 import com.wangzhengzhen.commons.validator.routines.IValidator;
 
@@ -16,6 +18,7 @@ public class TestMain {
 		Validator.register(Sex.class, new SexValidator());
 		
 		register();
+		System.out.println("======== 分隔线 =========");
 		login();
 		
 	}
@@ -29,12 +32,15 @@ public class TestMain {
 		model.setPhoneNumber("15522222222");
 		model.setVerifyCode("123546");
 		
-		IValidator<?> v = Validator.checkForGroupId(model, TestModel.GROUP_LOGIN);
+		List<IValidator<?>> list = Validator.checkForGroup(model, TestModel.GROUP_LOGIN);
 		
-		if (null == v) {
+		if (list.isEmpty()) {
 			System.out.println("登录验证成功");
 		} else {
-			System.out.println("登录验证失败：" + v.failureDesc());
+			System.out.println("登录验证失败");
+			for (IValidator<?> v : list) {
+				System.out.println(v.failureDesc());
+			}
 		}
 	}
 	
@@ -46,12 +52,15 @@ public class TestMain {
 		model.setSex("阴阳人");
 		model.setPhoneNumber("15522222222");
 		
-		IValidator<?> v = Validator.checkForGroupId(model, TestModel.GROUP_REGISTER);
+		List<IValidator<?>> list = Validator.checkForGroup(model, TestModel.GROUP_REGISTER);
 		
-		if (null == v) {
+		if (list.isEmpty()) {
 			System.out.println("注册验证成功");
 		} else {
-			System.out.println("注册验证失败：" + v.failureDesc());
+			System.out.println("注册验证失败");
+			for (IValidator<?> v : list) {
+				System.out.println(v.failureDesc());
+			}
 		}
 	}
 	

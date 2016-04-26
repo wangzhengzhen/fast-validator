@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,18 @@ import com.wangzhengzhen.commons.validator.routines.IValidator;
 public class AnnotationParser {
 
 	/**
+	 * 缓存
+	 */
+	private static Map<Class<?>, List<ParseModel>> cacheMap;
+	
+	/**
 	 * 解析注解列表
 	 */
 	private List<Class<?>> parserList;
+	
+	static {
+		cacheMap = new HashMap<Class<?>, List<ParseModel>>();
+	}
 
 	public AnnotationParser(List<Class<?>> list) {
 
@@ -40,11 +50,12 @@ public class AnnotationParser {
 	}
 
 	/**
-	 * 获取字段在解析列表中的注解
+	 * 获取字段在解析列表中的注解（暂不使用）
 	 * 
 	 * @param field
 	 * @return
 	 */
+	@Deprecated
 	public List<Annotation> getFieldAnnotations(Field field) {
 
 		List<Annotation> annoList = new ArrayList<Annotation>();
@@ -64,15 +75,24 @@ public class AnnotationParser {
 	}
 
 	/**
-	 * 
+	 *  获取类中所有声明要解析的注解
 	 * @param cls
 	 * @param validators
 	 * @return
 	 */
 	public List<ParseModel> getClassAnnotations(Class<?> cls, final Map<Class<?>, IValidator<?>> validators) {
 		
+		
+		
 		// 保存class中的所有注解
-		List<ParseModel> list = new ArrayList<AnnotationParser.ParseModel>();
+		List<ParseModel> list = cacheMap.get(cls);
+		
+		if (null == list) {
+			list = new ArrayList<AnnotationParser.ParseModel>();
+		} else {
+			// 返回缓存中的数据
+			return list;
+		}
 
 		Field[] fields = cls.getDeclaredFields();
 		for (Field f : fields) {
@@ -111,11 +131,14 @@ public class AnnotationParser {
 					return 1;
 				}
 				if (id0 > id1) {
-					return -1;
+					return 0;
 				}
 				return 0;
 			}
 		});
+		
+		cacheMap.put(cls, list);
+		
 		return list;
 	}
 
