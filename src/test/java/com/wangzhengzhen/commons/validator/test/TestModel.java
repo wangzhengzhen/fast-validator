@@ -1,6 +1,6 @@
 package com.wangzhengzhen.commons.validator.test;
 
-import com.wangzhengzhen.commons.validator.annotation.IntegerNumber;
+import com.wangzhengzhen.commons.validator.annotation.Range;
 import com.wangzhengzhen.commons.validator.annotation.IsPhoneNumber;
 import com.wangzhengzhen.commons.validator.annotation.NotEmpty;
 
@@ -22,7 +22,7 @@ public class TestModel {
 	@Sex(groupId = GROUP_REGISTER, failureDesc = "性别只能是‘男’或‘女’")
 	private String sex;
 	
-	@IntegerNumber(id = 1, groupId = GROUP_REGISTER, max = 120, min = 0, failureDesc = "年龄只能是 0 - 120 岁")
+	@Range(id = 1, groupId = GROUP_REGISTER, max = 120, min = 0, failureDesc = "年龄只能是 0 - 120 岁")
 	private int age;
 	
 	@IsPhoneNumber(groupId = {GROUP_REGISTER, GROUP_LOGIN}, failureDesc = "手机号码格式错误")

@@ -2,25 +2,25 @@ package com.wangzhengzhen.commons.validator.routines;
 
 import java.lang.annotation.Annotation;
 
-import com.wangzhengzhen.commons.validator.annotation.IntegerNumber;
+import com.wangzhengzhen.commons.validator.annotation.Range;
 
 /**
- * 长度限制验证
+ * 数值限制验证
  * @author wangzhengzhen
  *
  */
-public class IntegerNumberValidator implements IValidator<IntegerNumber> {
+public class RangeValidator implements IValidator<Range> {
 	
-	private IntegerNumber numAnno;
+	private Range numAnno;
 
-	public IntegerNumber getAnnotation(Annotation anno) {
+	public Range getAnnotation(Annotation anno) {
 
-		return (IntegerNumber) anno;
+		return (Range) anno;
 	}
 
 	public int getId(Annotation anno) {
 
-		IntegerNumber numAnno = getAnnotation(anno);
+		Range numAnno = getAnnotation(anno);
 
 		if (null == numAnno) {
 			return -1;
@@ -31,7 +31,7 @@ public class IntegerNumberValidator implements IValidator<IntegerNumber> {
 
 	public int[] getGroupId(Annotation anno) {
 
-		IntegerNumber numAnno = getAnnotation(anno);
+		Range numAnno = getAnnotation(anno);
 
 		if (null == numAnno) {
 			return null;
@@ -42,7 +42,7 @@ public class IntegerNumberValidator implements IValidator<IntegerNumber> {
 
 	public boolean validate(Annotation anno, Object val) {
 		
-		numAnno = (IntegerNumber) anno;
+		numAnno = (Range) anno;
 		
 		if (null == anno || null == val) {
 

@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Documented
-public @interface IntegerNumber {
+public @interface Range {
 
 	/**
 	 * 用来排列验证的先后序，也可以用来标记在一个类中唯一属性
