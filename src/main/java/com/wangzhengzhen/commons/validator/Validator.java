@@ -7,22 +7,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.framework.commons.validator.AnnotationParser;
-import com.wangzhengzhen.commons.validator.annotation.Range;
 import com.wangzhengzhen.commons.validator.annotation.IsEmail;
 import com.wangzhengzhen.commons.validator.annotation.IsPhoneNumber;
 import com.wangzhengzhen.commons.validator.annotation.Length;
 import com.wangzhengzhen.commons.validator.annotation.NotEmpty;
 import com.wangzhengzhen.commons.validator.annotation.NotNull;
 import com.wangzhengzhen.commons.validator.annotation.Password;
+import com.wangzhengzhen.commons.validator.annotation.Range;
 import com.wangzhengzhen.commons.validator.routines.EmailValidator;
 import com.wangzhengzhen.commons.validator.routines.IValidator;
-import com.wangzhengzhen.commons.validator.routines.RangeValidator;
 import com.wangzhengzhen.commons.validator.routines.LengthValidator;
 import com.wangzhengzhen.commons.validator.routines.NotEmptyValidator;
 import com.wangzhengzhen.commons.validator.routines.NotNullValidator;
 import com.wangzhengzhen.commons.validator.routines.PasswordValidator;
 import com.wangzhengzhen.commons.validator.routines.PhoneNumberValidator;
+import com.wangzhengzhen.commons.validator.routines.RangeValidator;
 
 /**
  * 验证器
