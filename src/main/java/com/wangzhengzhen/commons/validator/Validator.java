@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.wangzhengzhen.commons.validator.annotation.CheckValue;
 import com.wangzhengzhen.commons.validator.annotation.IsEmail;
 import com.wangzhengzhen.commons.validator.annotation.IsPhoneNumber;
 import com.wangzhengzhen.commons.validator.annotation.Length;
@@ -14,6 +15,7 @@ import com.wangzhengzhen.commons.validator.annotation.NotEmpty;
 import com.wangzhengzhen.commons.validator.annotation.NotNull;
 import com.wangzhengzhen.commons.validator.annotation.Password;
 import com.wangzhengzhen.commons.validator.annotation.Range;
+import com.wangzhengzhen.commons.validator.routines.CheckValueValidator;
 import com.wangzhengzhen.commons.validator.routines.EmailValidator;
 import com.wangzhengzhen.commons.validator.routines.IValidator;
 import com.wangzhengzhen.commons.validator.routines.LengthValidator;
@@ -46,6 +48,7 @@ public class Validator {
 		register(NotEmpty.class, new NotEmptyValidator());
 		register(Length.class, new LengthValidator());
 		register(Range.class, new RangeValidator());
+		register(CheckValue.class, new CheckValueValidator());
 	}
 
 	/**
