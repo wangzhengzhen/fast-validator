@@ -23,7 +23,7 @@ public @interface Password {
 	 * 组ID，可以在验证时指定验证某一组的字段
 	 * @return
      */
-	int[] groupId() default -1;
+	int[] groupId() default {};
 
 	/**
 	 * Android专用，resId指向string.xml中的资源，用于返回验证失败的信息

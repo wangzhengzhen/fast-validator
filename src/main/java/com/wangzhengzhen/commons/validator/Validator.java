@@ -93,7 +93,7 @@ public class Validator {
 	 * @param groupId
 	 * @return 返回验证失败的验证器
 	 */
-	public static List<IValidator<?>> checkForGroup(Object obj, Integer groupId) {
+	public static List<IValidator<?>> checkAllForGroup(Object obj, Integer groupId) {
 
 		List<IValidator<?>> list = new ArrayList<IValidator<?>>();
 
@@ -173,13 +173,59 @@ public class Validator {
 		return rValidator;
 	}
 	
+	public static IValidator<?> checkForGroup(Object obj, Integer groupId) {
+
+		IValidator<?> validator = null;
+
+		Class<?> cls = obj.getClass();
+
+		try {
+
+			List<AnnotationParser.ParseModel> clsAnnosMap = annoParser.getClassAnnotations(cls, validators);
+			for (AnnotationParser.ParseModel model : clsAnnosMap) {
+				Field f = model.getField();
+				Annotation anno = model.getAnno();
+				IValidator<?> tmpValidator = model.getValidator();
+
+				boolean exist = false;
+				int[] groupIds = tmpValidator.getGroupId(anno);
+				for (int id : groupIds) {
+					// 排除该注解的验证
+					if (id == groupId) {
+						exist = true;
+						break;
+					}
+				}
+
+				if (!exist) {
+					continue;
+				}
+
+				f.setAccessible(true);
+				boolean flag = tmpValidator.validate(anno, f.get(obj));
+				if (!flag) {
+					validator = tmpValidator;
+					break;
+				}
+
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return validator;
+	}
+	
 	/**
 	 * 如果字段在指定组或未声明组ID时，则验证
 	 * @param obj
 	 * @param groupId
 	 * @return
 	 */
-	public static List<IValidator<?>> checkForGroupAndDefault(Object obj, Integer groupId) {
+	public static List<IValidator<?>> checkAllForGroupAndDefault(Object obj, Integer groupId) {
 
 		List<IValidator<?>> list = new ArrayList<IValidator<?>>();
 
@@ -225,6 +271,61 @@ public class Validator {
 		}
 
 		return list;
+	}
+	
+	/**
+	 * 
+	 * @param obj
+	 * @param groupId
+	 * @return
+	 */
+	public static IValidator<?> checkForGroupAndDefault(Object obj, Integer groupId) {
+
+		IValidator<?> validator = null;
+
+		Class<?> cls = obj.getClass();
+
+		try {
+
+			List<AnnotationParser.ParseModel> clsAnnosMap = annoParser.getClassAnnotations(cls, validators);
+			for (AnnotationParser.ParseModel model : clsAnnosMap) {
+				Field f = model.getField();
+				Annotation anno = model.getAnno();
+				IValidator<?> tmpValidator = model.getValidator();
+
+				boolean exist = false;
+				int[] groupIds = tmpValidator.getGroupId(anno);
+				for (int id : groupIds) {
+					// 排除该注解的验证
+					if (id == groupId) {
+						exist = true;
+						break;
+					}
+				}
+
+				/**
+				 * 如果指定group，且不存在则跳出
+				 */
+				if (!exist && groupIds.length > 0) {
+					continue;
+				}
+
+				f.setAccessible(true);
+				boolean flag = tmpValidator.validate(anno, f.get(obj));
+				if (!flag) {
+					validator = tmpValidator;
+					break;
+				}
+
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+
+		return validator;
 	}
 	
 	/**

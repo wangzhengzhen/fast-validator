@@ -32,7 +32,7 @@ public class TestMain {
 		model.setPhoneNumber("15522222222");
 		model.setVerifyCode("123546");
 		
-		List<IValidator<?>> list = Validator.checkForGroup(model, TestModel.GROUP_LOGIN);
+		List<IValidator<?>> list = Validator.checkAllForGroup(model, TestModel.GROUP_LOGIN);
 		
 		if (list.isEmpty()) {
 			System.out.println("登录验证成功");
@@ -52,7 +52,7 @@ public class TestMain {
 		model.setSex("阴阳人");
 		model.setPhoneNumber("15522222222");
 		
-		List<IValidator<?>> list = Validator.checkForGroup(model, TestModel.GROUP_REGISTER);
+		List<IValidator<?>> list = Validator.checkAllForGroup(model, TestModel.GROUP_REGISTER);
 		
 		if (list.isEmpty()) {
 			System.out.println("注册验证成功");

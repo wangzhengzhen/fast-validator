@@ -23,7 +23,7 @@ public @interface NotNull {
 	 * 组ID，可以在验证时指定验证某一组的字段
 	 * @return
      */
-	int[] groupId() default -1;
+	int[] groupId() default {};
 
 	int failureDescResId() default -1;
 
