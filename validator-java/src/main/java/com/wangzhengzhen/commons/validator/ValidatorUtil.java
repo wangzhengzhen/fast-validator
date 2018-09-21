@@ -76,10 +76,10 @@ public class ValidatorUtil {
 			}
 
 			if (failValidators.isEmpty()) {
-				validateResult.setValidateFlag(true);
+				validateResult.setSuccess(true);
 
 			} else {
-				validateResult.setValidateFlag(false);
+				validateResult.setSuccess(false);
 				validateResult.setFailValidators(failValidators);
 				List<Validator> validatorList = failValidators.get(failValidators.keySet().iterator().next());
 				Validator v = validatorList.get(0);

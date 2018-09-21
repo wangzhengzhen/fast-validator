@@ -31,7 +31,7 @@ public class TestMain {
 		
 		ValidateResult result = ValidatorUtil.checkAllAndGroup(model, TestModel.GROUP_LOGIN);
 		
-		if (result.isValidateFlag()) {
+		if (result.isSuccess()) {
 			System.out.println("登录验证成功");
 		} else {
 			System.out.println("登录验证失败");
@@ -53,7 +53,7 @@ public class TestMain {
 
 		ValidateResult result = ValidatorUtil.checkAllAndGroup(model, TestModel.GROUP_REGISTER);
 		
-		if (result.isValidateFlag()) {
+		if (result.isSuccess()) {
 			System.out.println("注册验证成功");
 		} else {
 			System.out.println("注册验证失败");

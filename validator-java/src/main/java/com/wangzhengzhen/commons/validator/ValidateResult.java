@@ -15,7 +15,7 @@ public class ValidateResult {
 
     private String failDesc;
 
-    private boolean validateFlag;
+    private boolean isSuccess;
 
     private Map<Field, List<Validator>> failValidators;
 
@@ -51,12 +51,12 @@ public class ValidateResult {
         this.failDesc = failDesc;
     }
 
-    public boolean isValidateFlag() {
-        return validateFlag;
+    public boolean isSuccess() {
+        return isSuccess;
     }
 
-    public void setValidateFlag(boolean validateFlag) {
-        this.validateFlag = validateFlag;
+    public void setSuccess(boolean success) {
+        isSuccess = success;
     }
 
     public Map<Field, List<Validator>> getFailValidators() {
