@@ -52,6 +52,8 @@ public class ValidatorUtil {
 			}
 
 			for (Set<AnnotationParser.ValidateModel> set : listValidateModel) {
+				// 中断标志
+				boolean breakOff = false;
 				for (AnnotationParser.ValidateModel model : set) {
 					Field f = model.getField();
 					Annotation annot = model.getAnnot();
@@ -66,12 +68,16 @@ public class ValidatorUtil {
 							failValidators.put(f, validatorList);
 						}
 						validatorList.add(validator);
-						if (flag == ValidateFlag.CHECK_ALL) {
+						if (flag == ValidateFlag.CHECK_ALL || flag == ValidateFlag.CHECK_ALL_AND_GROUP) {
 							continue;
 						} else {
+							breakOff = true;
 							break;
 						}
 					}
+				}
+				if (breakOff) {
+					break;
 				}
 			}
 
